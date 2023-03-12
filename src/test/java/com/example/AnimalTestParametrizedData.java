@@ -19,22 +19,29 @@ public class AnimalTestParametrizedData {
         return new Object[][] {
                 {"Травоядное", List.of("Трава", "Различные растения")},
                 {"Хищник", List.of("Животные", "Птицы", "Рыба")},
-                {"Покемон", List.of("")},
         };
     }
     @Test
-    public void getFoodParametrizedDataCheck(){
+    public void getFoodParametrizedDataCheck() throws Exception {
+        Animal animal = new Animal();
+        List<String> expectedFood = foodType;
+        List<String> actualFood = animal.getFood(animalKind);
+        Assert.assertEquals(expectedFood, actualFood);
+        System.out.println(actualFood);
+    }
+    @Test
+    public void getFoodExceptionCheck(){
+        String exceptionText = new String();
         try {
             Animal animal = new Animal();
-            List<String> expectedFood = foodType;
-            List<String> actualFood = animal.getFood(animalKind);
-            Assert.assertEquals(expectedFood, actualFood);
-            System.out.println(actualFood);
+            animal.getFood("Пивозавр");
         } catch (Exception e) {
-            Assert.assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", e.getMessage());
-            System.out.println(e.getMessage());
+            exceptionText = e.getMessage();
         }
+        Assert.assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", exceptionText);
+        System.out.println(exceptionText);
     }
+
     @Test
     public void getFamilyCheck() {
         Animal animal = new Animal();

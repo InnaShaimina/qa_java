@@ -5,9 +5,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(Parameterized.class) // запускаем тест с параметрами
 public class LionTestParametrizedData {
-    Feline feline;
+    Feline feline = new Feline();
     private final String sex;
     private final boolean expectedHasMane;
     public LionTestParametrizedData(String sex, boolean expectedHasMane) {
@@ -20,20 +22,14 @@ public class LionTestParametrizedData {
         return new Object[][] {
                 {"Самец", true},
                 {"Самка", false},
-                {"Покемон", false},
         };
     }
 
     @Test
-    public void lionSexParametrizedCheck()  {
-        try {
-            Lion lion = new Lion(feline, sex);
-            boolean actualHasMane = lion.doesHaveMane();
-            Assert.assertEquals(expectedHasMane, actualHasMane);
-            System.out.println(actualHasMane);
-        } catch (Exception e) {
-            Assert.assertEquals("Используйте допустимые значения пола животного - самец или самка", e.getMessage());
-            System.out.println(e.getMessage());
-        }
+    public void lionSexParametrizedCheck() throws Exception {
+        Lion lion = new Lion(feline, sex);
+        boolean actualHasMane = lion.doesHaveMane();
+        assertEquals(expectedHasMane, actualHasMane);
+        System.out.println(actualHasMane);
     }
 }

@@ -5,10 +5,10 @@ import java.util.List;
 public class Lion {
 
     boolean hasMane;
-    private IFeline feline; //создали в зависимом классе поле того же типа что и интерфейс
+    Feline feline = new Feline();
 
-    //создали конструктор с параметром того же типа что и интерфейс
-    public Lion(IFeline feline, String sex) throws Exception {
+    //создали конструктор с параметром того же типа что и класс - зависимость
+    public Lion(Feline feline, String sex) throws Exception {
         this.feline = feline;
         if ("Самец".equals(sex)) {
             hasMane = true;
